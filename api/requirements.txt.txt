@@ -1,0 +1,32 @@
+tensorflow==2.5.0
+fastapi
+uvicorn
+python-multipart
+pillow
+tensorflow-serving-api==2.5.0
+matplotlib
+numpy
+
+
+from fastapi import FastAPI, File, UploadFile
+import uvicorn
+import numpy as np
+
+app = FastAPI()
+
+#MODEL = tf.keras.models.load_model("../models/1")
+#CLASS_NAMES = ["Cercospora_leaf_spot Gray_leaf_spot", "Common_rust_", "Common_rust_", "Common_rust_"]
+
+
+@app.get("/ping")
+async def ping():
+    return "Hello, I am alive"
+
+@app.post("/predict")
+async def predict(
+    file: UploadFile = File(...)
+):
+    pass
+
+if __name__ == "__main__":
+    uvicorn.run(app, host='localhost', port=8000)
